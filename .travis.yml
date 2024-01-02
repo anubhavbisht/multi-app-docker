@@ -12,10 +12,10 @@ script:
   - docker run -e CI=true majinbisht/react-test npm run test
 
 after_success: 
-  - docker build -t majinbisht/multi-client -f ./client 
-  - docker build -t majinbisht/multi-server -f ./server 
-  - docker build -t majinbisht/multi-nginx -f ./nginx
-  - docker build -t majinbisht/multi-worker -f ./worker 
+  - docker build -t majinbisht/multi-client ./client 
+  - docker build -t majinbisht/multi-server ./server 
+  - docker build -t majinbisht/multi-nginx  ./nginx
+  - docker build -t majinbisht/multi-worker ./worker 
   # first do dockerhub login
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # now take those images and push it to docker hub
