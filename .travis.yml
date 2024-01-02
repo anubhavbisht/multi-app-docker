@@ -23,4 +23,15 @@ after_success:
   - docker push majinbisht/multi-server
   - docker push majinbisht/multi-nginx
   - docker push majinbisht/multi-worker
-  
+
+deploy:
+  provider: elasticbeanstalk
+  region: "eu-north-1"
+  app: "multi-docker"
+  env: "Multi-docker-env"
+  bucket_name: "elasticbeanstalk-eu-north-1-961492333341"
+  bucket_path: "multi-docker"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
