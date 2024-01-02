@@ -1,0 +1,18 @@
+language: generic
+
+sudo: required
+
+services: 
+  - docker
+
+before_install: 
+  - docker build -t anubhavbisht/react-test -f ./client/Dockerfile.dev ./client
+
+script: 
+  - docker run -e CI=true anubhavbisht/react-test npm run test
+
+after_success: 
+  - docker build -t anubhavbisht/multi-client -f ./client 
+  - docker build -t anubhavbisht/multi-server -f ./server 
+  - docker build -t anubhavbisht/multi-nginx -f ./nginx
+  - docker build -t anubhavbisht/multi-worker -f ./worker 
